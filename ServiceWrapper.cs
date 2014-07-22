@@ -1,6 +1,6 @@
 ﻿/*
  * Authors:
- *   Zhong Feng <zongsoft@gmail.com>
+ *   钟峰(Popeye Zhong) <zongsoft@gmail.com>
  *
  * Copyright (C) 2013 Zongsoft Corporation <http://www.zongsoft.com>
  *
@@ -13,7 +13,7 @@
  *
  * Zongsoft.Daemon.Launcher is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
  *
  * The above copyright notice and this permission notice shall be
