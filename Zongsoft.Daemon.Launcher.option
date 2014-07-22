@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<options>
+	<option path="/Diagnostics">
+		<tracer tracer.type="Zongsoft.Diagnostics.Configuration.TracerElement, Zongsoft.CoreLibrary" enabled="true">
+			<listeners>
+				<listener name="FileLogTraceListener" type="Zongsoft.Diagnostics.FileLogTraceListener, Zongsoft.CoreLibrary" />
+			</listeners>
+		</tracer>
+	</option>
+</options>
