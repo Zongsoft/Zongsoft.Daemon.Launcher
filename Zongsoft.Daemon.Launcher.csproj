@@ -45,10 +45,10 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
     <Reference Include="Zongsoft.CoreLibrary">
-      <HintPath>..\Zongsoft.CoreLibrary\bin\Debug\Zongsoft.CoreLibrary.dll</HintPath>
+      <HintPath>..\Zongsoft.CoreLibrary\bin\$(Configuration)\Zongsoft.CoreLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Zongsoft.Plugins">
-      <HintPath>..\Zongsoft.Plugins\bin\Debug\Zongsoft.Plugins.dll</HintPath>
+      <HintPath>..\Zongsoft.Plugins\bin\$(Configuration)\Zongsoft.Plugins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +67,10 @@
     <EmbeddedResource Include="Resources.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Zongsoft.Plugins\Main.plugin">
+      <Link>plugins\Main.plugin</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="Zongsoft.Daemon.Launcher.option">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
