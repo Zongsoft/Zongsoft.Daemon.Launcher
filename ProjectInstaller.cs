@@ -139,18 +139,25 @@ namespace Zongsoft.Daemon.Launcher
 
 			if(node.NodeType != PluginTreeNodeType.Empty)
 			{
-				 var value = node.UnwrapValue<WorkerDecorator>(ObtainMode.Auto, this, null);
+				var worker = node.UnwrapValue<Zongsoft.Services.IWorker>(ObtainMode.Auto, this, null);
 
-				if(value != null)
+				if(worker != null)
 				{
 					ServiceInstaller installer = new ServiceInstaller();
 
 					installer.DelayedAutoStart = false;
-					installer.Description = value.Description;
-					installer.DisplayName = value.Title;
-					installer.ServiceName = value.Name;
-					installer.StartType = (value.Disabled ? ServiceStartMode.Disabled : ServiceStartMode.Automatic);
-					installer.ServicesDependedOn = value.Dependences;
+					installer.ServiceName = worker.Name;
+					installer.StartType = (worker.Disabled ? ServiceStartMode.Disabled : ServiceStartMode.Automatic);
+
+					//设置安装服务的描述文本
+					var descriptionAttribute = (DescriptionAttribute)Attribute.GetCustomAttribute(worker.GetType(), typeof(DescriptionAttribute));
+					if(descriptionAttribute != null)
+						installer.Description = Resources.ResourceUtility.GetString(descriptionAttribute.Description, worker.GetType().Assembly);
+
+					//设置安装服务的显示名称
+					var displayAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(worker.GetType(), typeof(DisplayNameAttribute));
+					if(displayAttribute != null)
+						installer.DisplayName = Resources.ResourceUtility.GetString(displayAttribute.DisplayName, worker.GetType().Assembly);
 
 					installers.Add(installer);
 				}
