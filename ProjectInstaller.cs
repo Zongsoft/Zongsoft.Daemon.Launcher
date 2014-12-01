@@ -147,7 +147,10 @@ namespace Zongsoft.Daemon.Launcher
 					var worker = node.UnwrapValue<Zongsoft.Services.IWorker>(ObtainMode.Auto, this, null);
 
 					if(worker != null)
+					{
 						workerType = worker.GetType();
+						disabled = worker.Disabled;
+					}
 				}
 				else
 				{
@@ -155,8 +158,11 @@ namespace Zongsoft.Daemon.Launcher
 
 					if(builtin != null && builtin.BuiltinType != null)
 					{
-						workerType = builtin.BuiltinType.Type;
-						disabled = builtin.Properties.GetValue<bool>("disabled");
+						if(typeof(IWorker).IsAssignableFrom(builtin.BuiltinType.Type))
+						{
+							workerType = builtin.BuiltinType.Type;
+							disabled = builtin.Properties.GetValue<bool>("disabled");
+						}
 					}
 				}
 
