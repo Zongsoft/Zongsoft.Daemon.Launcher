@@ -37,8 +37,11 @@ namespace Zongsoft.Daemon.Launcher
 {
 	public class ServiceWrapper : ServiceBase
 	{
+		#region 成员字段
 		private IWorker _worker;
+		#endregion
 
+		#region 构造函数
 		public ServiceWrapper(IWorker worker)
 		{
 			if(worker == null)
@@ -47,9 +50,11 @@ namespace Zongsoft.Daemon.Launcher
 			_worker = worker;
 
 			this.ServiceName = worker.Name;
-			this.CanPauseAndContinue = false;
+			this.CanPauseAndContinue = worker.CanPauseAndContinue;
 		}
+		#endregion
 
+		#region 重写方法
 		protected override void OnStart(string[] args)
 		{
 			_worker.Start(args);
@@ -59,5 +64,16 @@ namespace Zongsoft.Daemon.Launcher
 		{
 			_worker.Stop();
 		}
+
+		protected override void OnPause()
+		{
+			_worker.Pause();
+		}
+
+		protected override void OnContinue()
+		{
+			_worker.Resume();
+		}
+		#endregion
 	}
 }
