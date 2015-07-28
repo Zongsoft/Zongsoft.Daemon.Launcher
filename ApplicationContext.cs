@@ -39,13 +39,13 @@ namespace Zongsoft.Daemon.Launcher
 		public static readonly ApplicationContext Current = new ApplicationContext();
 		#endregion
 
+		#region 成员字段
+		private Zongsoft.Options.Configuration.OptionConfiguration _configuration;
+		#endregion
+
 		#region 私有构造
 		private ApplicationContext() : base("Zongsoft.Daemon.Launcher")
 		{
-			string filePaht = Path.Combine(this.ApplicationDirectory, Assembly.GetEntryAssembly().GetName().Name) + ".option";
-
-			if(File.Exists(filePaht))
-				this.Configuration = Options.Configuration.OptionConfiguration.Load(filePaht);
 		}
 		#endregion
 
@@ -61,6 +61,24 @@ namespace Zongsoft.Daemon.Launcher
 			get
 			{
 				return Path.GetDirectoryName(this.GetType().Assembly.Location);
+			}
+		}
+
+		public override Zongsoft.Options.Configuration.OptionConfiguration Configuration
+		{
+			get
+			{
+				if(_configuration == null)
+				{
+					string filePaht = Path.Combine(this.ApplicationDirectory, Assembly.GetEntryAssembly().GetName().Name) + ".option";
+
+					if(File.Exists(filePaht))
+						_configuration = Options.Configuration.OptionConfiguration.Load(filePaht);
+					else
+						_configuration = new Options.Configuration.OptionConfiguration(filePaht);
+				}
+
+				return _configuration;
 			}
 		}
 		#endregion
