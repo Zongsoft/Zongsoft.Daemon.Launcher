@@ -19,7 +19,7 @@
 				<predication minLevel="Warn" />
 
 				<properties>
-					<property name="FilePath" value="logs/{date:yyyyMMdd}/{source}-{sequence}.log" />
+					<property name="FilePath" value="logs/${binding:timestamp#yyyyMM}/${binding:source}[{sequence}].log" />
 				</properties>
 			</handler>
 		</logger>
