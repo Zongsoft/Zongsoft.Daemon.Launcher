@@ -15,12 +15,9 @@
 
 	<option path="/Diagnostics">
 		<logger>
-			<handler name="File" type="Zongsoft.Diagnostics.TextFileLogger, Zongsoft.CoreLibrary">
+			<handler name="File" type="Zongsoft.Diagnostics.TextFileLogger, Zongsoft.CoreLibrary"
+			         filePath="logs/${binding:timestamp#yyyyMM}/${binding:source}[{sequence}].log">
 				<predication minLevel="Warn" />
-
-				<properties>
-					<property name="FilePath" value="logs/${binding:timestamp#yyyyMM}/${binding:source}[{sequence}].log" />
-				</properties>
 			</handler>
 		</logger>
 
