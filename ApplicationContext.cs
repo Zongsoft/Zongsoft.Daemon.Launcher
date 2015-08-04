@@ -46,6 +46,7 @@ namespace Zongsoft.Daemon.Launcher
 		#region 私有构造
 		private ApplicationContext() : base("Zongsoft.Daemon.Launcher")
 		{
+			Zongsoft.ComponentModel.ApplicationContextBase.Current = this;
 		}
 		#endregion
 
