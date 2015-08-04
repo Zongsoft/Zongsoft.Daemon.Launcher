@@ -36,7 +36,7 @@ namespace Zongsoft.Daemon.Launcher
 	public class ApplicationContext : Zongsoft.Plugins.PluginApplicationContext
 	{
 		#region 静态字段
-		public static readonly ApplicationContext Current = new ApplicationContext();
+		public new static readonly ApplicationContext Current = new ApplicationContext();
 		#endregion
 
 		#region 成员字段
