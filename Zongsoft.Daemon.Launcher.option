@@ -3,13 +3,11 @@
 <options>
 	<declarations>
 		<declaration name="logger" type="Zongsoft.Diagnostics.Configuration.LoggerElement, Zongsoft.CoreLibrary" />
-		<declaration name="tracer" type="Zongsoft.Diagnostics.Configuration.TracerElement, Zongsoft.CoreLibrary" />
 	</declarations>
 
 	<option path="/">
 		<modules>
 			<module name="LoggerModule" type="Zongsoft.Diagnostics.LoggerModule, Zongsoft.CoreLibrary" />
-			<module name="TracerModule" type="Zongsoft.Diagnostics.TracerModule, Zongsoft.CoreLibrary" />
 		</modules>
 	</option>
 
@@ -20,11 +18,5 @@
 				<predication minLevel="Warn" />
 			</handler>
 		</logger>
-
-		<tracer enabled="true">
-			<listeners>
-				<listener name="FileLogTraceListener" type="Zongsoft.Diagnostics.FileLogTraceListener, Zongsoft.CoreLibrary" />
-			</listeners>
-		</tracer>
 	</option>
 </options>
