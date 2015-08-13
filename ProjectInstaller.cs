@@ -89,8 +89,8 @@ namespace Zongsoft.Daemon.Launcher
 
 			if(node == null)
 			{
-				string message = Zongsoft.Resources.ResourceUtility.GetString("${InstallFail.Message}", this.GetType().Assembly, ApplicationContext.Current.PluginContext.Settings.PluginsDirectory, servicesPath);
-				EventLog.WriteEntry(ApplicationContext.Current.ApplicationId, message, EventLogEntryType.Warning);
+				string message = Zongsoft.Resources.ResourceUtility.GetString("Text.InstallFailed.Message", this.GetType().Assembly, ApplicationContext.Current.PluginContext.Settings.PluginsDirectory, servicesPath);
+				this.WriteLog(message);
 			}
 			else
 			{
@@ -103,6 +103,21 @@ namespace Zongsoft.Daemon.Launcher
 		#endregion
 
 		#region 私有方法
+		private void WriteLog(string message)
+		{
+			if(string.IsNullOrEmpty(message))
+				return;
+
+			var directoryPath = System.IO.Path.GetDirectoryName(this.GetType().Assembly.Location);
+			var filePath = System.IO.Path.Combine(directoryPath, "Install.log");
+
+			using(var file = new System.IO.FileStream(filePath, System.IO.FileMode.Append, System.IO.FileAccess.Write))
+			{
+				var data = Encoding.UTF8.GetBytes(message + Environment.NewLine);
+				file.Write(data, 0, data.Length);
+			}
+		}
+
 		private string GetServicesPath()
 		{
 			var args = Environment.GetCommandLineArgs();
@@ -154,16 +169,10 @@ namespace Zongsoft.Daemon.Launcher
 				}
 				else
 				{
-					Builtin builtin = (Builtin)node.Value;
+					if(typeof(IWorker).IsAssignableFrom(node.ValueType))
+						workerType = node.ValueType;
 
-					if(builtin != null && builtin.BuiltinType != null)
-					{
-						if(typeof(IWorker).IsAssignableFrom(builtin.BuiltinType.Type))
-						{
-							workerType = builtin.BuiltinType.Type;
-							disabled = builtin.Properties.GetValue<bool>("disabled");
-						}
-					}
+					disabled = ((Builtin)node.Value).Properties.GetValue<bool>("disabled", false);
 				}
 
 				if(workerType != null)

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InstallFail.Message" xml:space="preserve">
+  <data name="Text.InstallFailed.Message" xml:space="preserve">
     <value>没有安装或卸载任何服务，其原因可能是：
 
 1、当前服务程序的插件目录是：{0}，请检查该目录或文件夹是否存在；
