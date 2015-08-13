@@ -154,8 +154,9 @@ namespace Zongsoft.Daemon.Launcher
 
 			if(node.NodeType != PluginTreeNodeType.Empty)
 			{
-				Type workerType = null;
+				Type serviceType = null;
 				bool disabled = false;
+				string serviceName = node.Name;
 
 				if(node.NodeType == PluginTreeNodeType.Custom)
 				{
@@ -163,35 +164,36 @@ namespace Zongsoft.Daemon.Launcher
 
 					if(worker != null)
 					{
-						workerType = worker.GetType();
+						serviceName = worker.Name;
+						serviceType = worker.GetType();
 						disabled = worker.Disabled;
 					}
 				}
 				else
 				{
 					if(typeof(IWorker).IsAssignableFrom(node.ValueType))
-						workerType = node.ValueType;
+						serviceType = node.ValueType;
 
 					disabled = ((Builtin)node.Value).Properties.GetValue<bool>("disabled", false);
 				}
 
-				if(workerType != null)
+				if(serviceType != null)
 				{
 					ServiceInstaller installer = new ServiceInstaller();
 
 					installer.DelayedAutoStart = false;
-					installer.ServiceName = node.Name;
+					installer.ServiceName = serviceName;
 					installer.StartType = (disabled ? ServiceStartMode.Disabled : ServiceStartMode.Automatic);
 
 					//设置安装服务的描述文本
-					var descriptionAttribute = (DescriptionAttribute)Attribute.GetCustomAttribute(workerType, typeof(DescriptionAttribute));
+					var descriptionAttribute = (DescriptionAttribute)Attribute.GetCustomAttribute(serviceType, typeof(DescriptionAttribute));
 					if(descriptionAttribute != null)
-						installer.Description = Resources.ResourceUtility.GetString(descriptionAttribute.Description, workerType.Assembly);
+						installer.Description = Resources.ResourceUtility.GetString(descriptionAttribute.Description, serviceType.Assembly);
 
 					//设置安装服务的显示名称
-					var displayAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(workerType, typeof(DisplayNameAttribute));
+					var displayAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(serviceType, typeof(DisplayNameAttribute));
 					if(displayAttribute != null)
-						installer.DisplayName = Resources.ResourceUtility.GetString(displayAttribute.DisplayName, workerType.Assembly);
+						installer.DisplayName = Resources.ResourceUtility.GetString(displayAttribute.DisplayName, serviceType.Assembly) + " (" + serviceName + ")";
 
 					installers.Add(installer);
 				}
