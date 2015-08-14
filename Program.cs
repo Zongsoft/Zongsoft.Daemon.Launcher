@@ -35,7 +35,19 @@ namespace Zongsoft.Daemon.Launcher
 		/// </summary>
 		internal static void Main(string[] args)
 		{
+			AppDomain.CurrentDomain.UnhandledException += AppDomain_UnhandledException;
 			Zongsoft.Plugins.Application.Start(ApplicationContext.Current, args);
+		}
+
+		private static void AppDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+		{
+			var exception = e.ExceptionObject as Exception;
+			var level = e.IsTerminating ? Zongsoft.Diagnostics.LogLevel.Fatal : Zongsoft.Diagnostics.LogLevel.Error;
+
+			if(exception == null)
+				Zongsoft.Diagnostics.Logger.Log(level, "UnhandledException", e.ExceptionObject);
+			else
+				Zongsoft.Diagnostics.Logger.Log(level, exception);
 		}
 	}
 }
