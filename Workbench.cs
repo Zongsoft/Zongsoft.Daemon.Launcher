@@ -2,7 +2,7 @@
  * Authors:
  *   钟峰(Popeye Zhong) <zongsoft@gmail.com>
  *
- * Copyright (C) 2013 Zongsoft Corporation <http://www.zongsoft.com>
+ * Copyright (C) 2013-2015 Zongsoft Corporation <http://www.zongsoft.com>
  *
  * This file is part of Zongsoft.Daemon.Launcher.
  *
@@ -79,7 +79,11 @@ namespace Zongsoft.Daemon.Launcher
 				if(value is ServiceBase)
 					services.Add((ServiceBase)value);
 				else if(value is IWorker)
-					services.Add(new ServiceWrapper((IWorker)value));
+				{
+					//注意：服务的运行时的名称与安装时注册使用的名称必须相同，但服务的注册名与Worker的Name属性并不确保一致！
+					//因此，运行时必须使用节点名作为后台服务的名称，以确保与服务安装过程中的注册名一致。
+					services.Add(new ServiceWrapper((IWorker)value, node.Name));
+				}
 			}
 
 			foreach(PluginTreeNode child in node.Children)

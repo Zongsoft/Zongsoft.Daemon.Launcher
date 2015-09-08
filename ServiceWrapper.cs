@@ -2,7 +2,7 @@
  * Authors:
  *   钟峰(Popeye Zhong) <zongsoft@gmail.com>
  *
- * Copyright (C) 2013 Zongsoft Corporation <http://www.zongsoft.com>
+ * Copyright (C) 2013-2015 Zongsoft Corporation <http://www.zongsoft.com>
  *
  * This file is part of Zongsoft.Daemon.Launcher.
  *
@@ -42,14 +42,14 @@ namespace Zongsoft.Daemon.Launcher
 		#endregion
 
 		#region 构造函数
-		public ServiceWrapper(IWorker worker)
+		public ServiceWrapper(IWorker worker, string name = null)
 		{
 			if(worker == null)
 				throw new ArgumentNullException("worker");
 
 			_worker = worker;
 
-			this.ServiceName = worker.Name;
+			this.ServiceName = string.IsNullOrWhiteSpace(name) ? worker.Name : name.Trim();
 			this.CanPauseAndContinue = worker.CanPauseAndContinue;
 		}
 		#endregion
