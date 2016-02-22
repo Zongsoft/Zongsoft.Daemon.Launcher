@@ -49,15 +49,15 @@ namespace Zongsoft.Daemon.Launcher
 			var services = this.GetServices();
 
 			if(services.Length > 0)
-				ServiceBase.Run(services);
+				System.ServiceProcess.ServiceBase.Run(services);
 		}
 		#endregion
 
 		#region 内部方法
-		internal ServiceBase[] GetServices()
+		internal System.ServiceProcess.ServiceBase[] GetServices()
 		{
 			//创建服务列表
-			List<ServiceBase> services = new List<ServiceBase>();
+			var services = new List<System.ServiceProcess.ServiceBase>();
 
 			//从挂载在启动路径下的工作者并将其装包在服务包装器中
 			this.GetServices(services, this.PluginContext.PluginTree.Find(this.StartupPath));
@@ -67,7 +67,7 @@ namespace Zongsoft.Daemon.Launcher
 		#endregion
 
 		#region 私有方法
-		private void GetServices(IList<ServiceBase> services, PluginTreeNode node)
+		private void GetServices(IList<System.ServiceProcess.ServiceBase> services, PluginTreeNode node)
 		{
 			if(services == null || node == null)
 				return;
@@ -76,8 +76,8 @@ namespace Zongsoft.Daemon.Launcher
 			{
 				object value = node.UnwrapValue(ObtainMode.Auto, this, null);
 
-				if(value is ServiceBase)
-					services.Add((ServiceBase)value);
+				if(value is System.ServiceProcess.ServiceBase)
+					services.Add((System.ServiceProcess.ServiceBase)value);
 				else if(value is IWorker)
 				{
 					//注意：服务的运行时的名称与安装时注册使用的名称必须相同，但服务的注册名与Worker的Name属性并不确保一致！

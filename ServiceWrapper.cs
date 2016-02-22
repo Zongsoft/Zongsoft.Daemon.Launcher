@@ -35,7 +35,7 @@ using Zongsoft.Services;
 
 namespace Zongsoft.Daemon.Launcher
 {
-	public class ServiceWrapper : ServiceBase
+	public class ServiceWrapper : System.ServiceProcess.ServiceBase
 	{
 		#region 成员字段
 		private IWorker _worker;
