@@ -1,0 +1,18 @@
+[bin $(Edition)]
+Install.bat
+Uninstall.bat
+
+[bin $(Edition) plugins]
+/Zongsoft/Zongsoft.Plugins/Main.plugin
+
+[bin $(Edition) plugins Zongsoft.Commands]
+/Zongsoft/Zongsoft.Commands/.deploy
+
+[bin $(Edition) plugins Zongsoft.Externals Json]
+/Zongsoft/Zongsoft.Externals.Json/.deploy
+
+[bin $(Edition) plugins Zongsoft.Externals Redis]
+/Zongsoft/Zongsoft.Externals.Redis/.deploy
+
+[bin $(Edition) plugins Zongsoft.Externals Aliyun]
+/Zongsoft/Zongsoft.Externals.Aliyun/.deploy
