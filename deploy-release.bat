@@ -1,1 +1,1 @@
-\Zongsoft\Zongsoft.Utilities.Deployer\src\bin\Debug\Zongsoft.Utilities.Deployer.exe -edition:Release ".deploy"
+\Zongsoft\Zongsoft.Utilities.Deployer\src\bin\Debug\Zongsoft.Utilities.Deployer.exe -edition:Release ".deploy" ".win.deploy"

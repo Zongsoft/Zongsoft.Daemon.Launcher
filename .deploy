@@ -1,7 +1,3 @@
-[bin $(Edition)]
-Install.bat
-Uninstall.bat
-
 [bin $(Edition) plugins]
 /Zongsoft/Zongsoft.Plugins/Main.plugin
 

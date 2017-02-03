@@ -1,0 +1,3 @@
+[bin $(Edition)]
+Install.bat
+Uninstall.bat
