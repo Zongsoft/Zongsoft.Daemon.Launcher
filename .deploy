@@ -9,6 +9,3 @@
 
 [bin $(Edition) plugins Zongsoft.Externals Redis]
 /Zongsoft/Zongsoft.Externals.Redis/.deploy
-
-[bin $(Edition) plugins Zongsoft.Externals Aliyun]
-/Zongsoft/Zongsoft.Externals.Aliyun/.deploy
