@@ -4,6 +4,9 @@
 [bin $(Edition) plugins Zongsoft.Commands]
 /Zongsoft/Zongsoft.Commands/.deploy
 
+[bin $(Edition) plugins Zongsoft.Net]
+/Zongsoft/Zongsoft.Net/.deploy
+
 [bin $(Edition) plugins Zongsoft.Externals Json]
 /Zongsoft/Zongsoft.Externals.Json/.deploy
 
