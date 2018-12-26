@@ -6,9 +6,9 @@
 	</declarations>
 
 	<option path="/">
-		<modules>
-			<module name="LoggerModule" type="Zongsoft.Diagnostics.LoggerModule, Zongsoft.CoreLibrary" />
-		</modules>
+		<filters>
+			<filter name="Logger" type="Zongsoft.Diagnostics.LoggerInitializer, Zongsoft.CoreLibrary" />
+		</filters>
 	</option>
 
 	<option path="/Diagnostics">
