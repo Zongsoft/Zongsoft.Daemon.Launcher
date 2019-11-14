@@ -166,7 +166,7 @@ namespace Zongsoft.Daemon.Launcher
 					{
 						serviceName = worker.Name;
 						serviceType = worker.GetType();
-						disabled = worker.Disabled;
+						disabled = !worker.Enabled;
 					}
 				}
 				else
