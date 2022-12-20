@@ -5,6 +5,8 @@
 README: [English](https://github.com/Zongsoft/Zongsoft.Daemon.Launcher/blob/master/README.md) | [简体中文](https://github.com/Zongsoft/Zongsoft.Daemon.Launcher/blob/master/README-zh_CN.md)
 
 -----
+注：该项目已归档，对应的替代版本请参考：https://github.com/Zongsoft/Framework/blob/master/hosting
+-----
 
 这是 [**Zongsoft**](https://github.com/Zongsoft) 插件应用的后台服务宿主程序。
 
